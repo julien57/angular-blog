@@ -1,0 +1,22 @@
+<li *ngFor="let post of posts; let i = index"
+    [ngClass]="{'list-group-item': true,
+              'list-group-item-success': post.love > 0,
+              'list-group-item-danger': post.love < 0}">
+  <div class="row">
+    <div class="col-md-7">
+      <h2 [ngStyle]="{color: getColorLoveIt(post.love)}">{{ post.title }}</h2>
+    </div>
+    <div class="col-md-5" id="date">
+      {{ post.created_at | date: 'd/M/yy, h:mm a' }}
+    </div>
+  </div>
+  <p [ngStyle]="{color: getColorLoveIt(post.love)}">{{ post.content }}</p>
+  <div class="row">
+    <button class="btn btn-success" (click)="onIncreaseLoveIt(i)">Love it!</button>
+    <button class="btn btn-danger" (click)="onDecreaseLoveIt(i)">Don't love it!</button>
+    <div class="text-right">
+      <button class="btn btn-danger" (click)="onDeletePost(post)">Supprimer post</button>
+    </div>
+  </div>
+</li>
+
